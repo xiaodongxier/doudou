@@ -1,52 +1,63 @@
-<!--
- * @Author: wangyongjie
- * @Date: 2021-03-06 18:46:32
- * @LastEditors: wangyongjie
- * @LastEditTime: 2021-03-07 23:59:33
- * @e-mail: admin@xiaodongxier.com
- * @FilePath: /my_job/Users/wangyongjie/Desktop/未命名文件夹/index.html
--->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>豆豆</title>
-    <script src="https://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.3.3.js" charset="utf-8"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <title>豆豆成长日记</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./static/css/timeline.css">
+    <script src="./static/js/modernizr.js"></script>
+    <script src="./static/js/jquery.min.js"></script>
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-
-        body {
-            background: #ccc;
-            overflow: hidden;
-        }
-
-        .wrap {
-            width: 1125px;
-            margin: 0 auto;
+        .cd-timeline-content span {
+            font-size: 12px;
+            color: #ccc;
         }
     </style>
 </head>
-
 <body>
-    <div class="wrap">
-        <div id="id_test_video" style="width:100%; height:auto;"></div>
-    </div>
+    <header>
+        <h1>豆豆成长日记</h1>
+    </header>
 
-    <!-- <video src="https://wangyongjie.com.cn/static/video/20200304.MOV" controls></video> -->
+    <section id="cd-timeline" class="cd-container">
+
+        <div class="cd-timeline-block">
+            <div class="cd-timeline-img cd-picture">
+                <img src="./static/images/cd-icon-location.svg" alt="Location">
+            </div>
+
+            <div class="cd-timeline-content">
+                <h2>带豆豆拍亲子照</h2>
+                <span>爱儿美朝阳公园店</span>
+                <p>
+                    和豆爸、豆妈、豆奶去爱儿美拍亲子照。
+                    <br>
+                    <img src="https://wangyongjie.com.cn/static/images/20210307.jpeg" alt="">
+                </p>
+                <!-- <a href="#" class="cd-read-more">阅读更多</a> -->
+                <span class="cd-date">2021-03-07 星期日</span>
+            </div>
+        </div> 
+
+    </section>
 
     <script>
-        var player = new TcPlayer('id_test_video', {
-            "m3u8": "https://wangyongjie.com.cn/static/video/20200304.MOV", //请替换成实际可用的播放地址
-            "autoplay": true,      //iOS 下 safari 浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
-            "poster": "http://www.test.com/myimage.jpg",
-            "width": '375',//视频的显示宽度，请尽量使用视频分辨率宽度
-            "height": 'auto'//视频的显示高度，请尽量使用视频分辨率高度
+        $(function () {
+            var $timeline_block = $('.cd-timeline-block');
+            $timeline_block.each(function () {
+                if ($(this).offset().top > $(window).scrollTop() + $(window).height() * 0.75) {
+                    $(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden');
+                }
+            });
+            $(window).on('scroll', function () {
+                $timeline_block.each(function () {
+                    if ($(this).offset().top <= $(window).scrollTop() + $(window).height() * 0.75 && $(this).find('.cd-timeline-img').hasClass('is-hidden')) {
+                        $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
+                    }
+                });
+            });
         });
     </script>
 </body>
