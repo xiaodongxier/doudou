@@ -1,6 +1,6 @@
-setTimeout(function () {
+setTimeout(function(){
     var mydom = document.querySelector('.youke-chat-window-frame iframe');
     var y = (mydom.contentWindow || mydom.contentDocument);
     if (y.document) y = y.document;
-    y.getElementsByClassName("hi-youke")[0].style.display = "none";
-}, 4500)
+    y.querySelectorAll(".message-list-wrapper .message-list-operations + div")[0].style.display = "none";
+  },2500)
